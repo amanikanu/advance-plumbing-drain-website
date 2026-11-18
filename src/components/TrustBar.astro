@@ -1,0 +1,11 @@
+---
+import Icon from './Icon.astro';import {business} from '@content/business';import {ratings} from '@content/reviews';
+---
+<div class="trust-bar"><div class="container trust-inner">
+ <div class="trust-item"><Icon name="shield" size={31} stroke={1.5}/><div><strong>Licensed contractor</strong><small>CA License #{business.license}</small></div></div>
+ <a class="trust-item" href={business.profiles.bbb} target="_blank" rel="noopener noreferrer"><Icon name="flame" size={32}/><div><strong>{business.credentialsApproved?'BBB Accredited':'Better Business Bureau'}</strong><small>View business profile <Icon name="upRight" size={10}/></small></div></a>
+ <a class="trust-item" href={business.profiles.diamond} target="_blank" rel="noopener noreferrer"><Icon name="diamond" size={31} stroke={1.4}/><div><strong>Diamond Certified</strong><small>View company profile <Icon name="upRight" size={10}/></small></div></a>
+ <div class="trust-item"><Icon name="clock" size={30} stroke={1.5}/><div><strong>24/7 availability</strong><small>Residential & commercial</small></div></div>
+ {business.approvedYears&&<div>{business.approvedYears} years in business</div>}
+ {business.showRatings&&ratings.filter(r=>r.approved&&r.verifiedOn&&r.url).map(r=><a class="rating-sourced" href={r.url}>{r.value}/5 · {r.count} {r.source} reviews · {r.verifiedOn}</a>)}
+</div></div>

@@ -1,0 +1,5 @@
+---
+import SectionLabel from './SectionLabel.astro';
+const steps=[['Tell us what’s happening','Call us or send a service request with a few details about the problem.'],['Get a clear estimate','We assess the issue and explain the work involved before you decide.'],['Get it taken care of','Once you approve the work, we make the repair and check the result.']];
+---
+<section class="process-section section-space"><div class="container"><SectionLabel text="THE PROCESS"/><h2>From first call to fixed.</h2><div class="process-grid">{steps.map(([t,d],i)=><div class="process-step"><div class="step-graphic"><b class="mono">0{i+1}</b><span></span></div><h3>{t}</h3><p>{d}</p></div>)}</div></div></section>

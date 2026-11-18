@@ -1,0 +1,61 @@
+{
+  "environment": "Local static production build; mobile simulated throttling; one clean run per route. Not field data.",
+  "reports": [
+    {
+      "route": "/",
+      "lighthouseVersion": "12.6.1",
+      "device": "mobile",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 100
+      },
+      "lcpMs": 1509,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    {
+      "route": "/plumbing-services-sf/water-heater/",
+      "lighthouseVersion": "12.6.1",
+      "device": "mobile",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lcpMs": 1353,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    {
+      "route": "/plumbers-in-daly-city-ca/",
+      "lighthouseVersion": "12.6.1",
+      "device": "mobile",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 100
+      },
+      "lcpMs": 1502,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    {
+      "route": "/contact-us/",
+      "lighthouseVersion": "12.6.1",
+      "device": "mobile",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 100
+      },
+      "lcpMs": 1363,
+      "cls": 0,
+      "tbtMs": 0
+    }
+  ]
+}

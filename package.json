@@ -1,0 +1,33 @@
+{
+  "name": "advanced-plumbing-sf",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "astro build && node scripts/check-site.mjs && node --test tests/discrepancies.test.mjs",
+    "preview": "node scripts/preview.mjs",
+    "check": "astro check",
+    "test": "node --test tests/requests.test.mjs",
+    "test:e2e": "playwright test",
+    "qa": "node scripts/check-site.mjs",
+    "launch:check": "node scripts/launch-check.mjs",
+    "lighthouse": "lhci autorun",
+    "test:routes": "playwright test tests/routes.spec.ts",
+    "test:matrix": "node --test tests/discrepancies.test.mjs"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "astro": "5.18.2",
+    "tailwindcss": "^4.1.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@axe-core/playwright": "^4.10.0",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.56.0",
+    "cheerio": "1.0.0",
+    "typescript": "^5.8.0"
+  }
+}

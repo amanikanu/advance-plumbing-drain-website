@@ -1,0 +1,139 @@
+---
+import Icon from './Icon.astro';
+import SectionLabel from './SectionLabel.astro';
+import { business } from '@content/business';
+import { reviews } from '@content/reviews';
+
+interface Props { full?: boolean }
+const { full = false } = Astro.props;
+const visible = reviews.filter(r => r.approved && r.name && r.url && r.date).slice(0, full ? 100 : 6);
+const sources = [
+  { key: 'google', name: 'Google Maps', href: business.profiles.google, width: 111, height: 36, index: '01' },
+  { key: 'yelp', name: 'Yelp', href: business.profiles.yelp, width: 98, height: 48, index: '02' },
+] as const;
+---
+<section class="reviews-section" id="customer-reviews" aria-labelledby="customer-reviews-heading">
+  <div class="container">
+    <div class="review-layout">
+      <div class="review-intro">
+        <SectionLabel text="CUSTOMER REVIEWS" />
+        <h2 id="customer-reviews-heading">{full ? 'Read the original reviews.' : 'Hear from our customers.'}</h2>
+        <p>Read customer feedback where it was shared: on Google or Yelp.</p>
+        {!full && <a class="review-directory-link" href="/reviews/">Reviews & credentials <Icon name="arrow" size={16} /></a>}
+      </div>
+      <div class="review-source-list">
+        {sources.map(source => (
+          <a class:list={['review-source', `source-${source.key}`]} href={source.href} target="_blank" rel="noopener noreferrer">
+            <div class="source-plate" aria-hidden="true">
+              <span class="source-index"><span></span> PROFILE / {source.index}</span>
+              <img class="platform-wordmark" src={`/images/review-sources/${source.key}.svg`} alt="" width={source.width} height={source.height} loading="lazy" decoding="async" />
+              {source.key === 'google' ? (
+                <svg class="source-drawing map-drawing-art" viewBox="0 0 160 130" fill="none" aria-hidden="true" focusable="false">
+                  <g stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="drawing-paper" d="m15 82 42-21 31 13 43-23 11 42-42 26-36-14-37 19Z" />
+                    <path d="m57 61 7 44m24-31 12 45M22 96l20-10 11 5 7-4m4-2 15-8 10 5m5 3 20-12 7 1 14-9M38 72l4 14-5 12 5 12m29-42 3 12 13 4 7 20m18-43 3 8-5 15 9 19m-91 5 16-7 11 2 6-4m5-2 13-6 14 5m4 2 18-12 8 1 16-11" />
+                    <path class="drawing-pin" d="M116 36c0 13-17 32-17 32S82 49 82 36a17 17 0 1 1 34 0Z" />
+                    <circle cx="99" cy="36" r="6" />
+                    <path d="M93 72c3 1 9 1 13-1" opacity=".65" />
+                  </g>
+                  <g stroke="currentColor" opacity=".5" stroke-width=".75"><path d="M34 40h9m-4.5-4.5v9M128 20h11m-5.5-5.5v11M134 114h7m-3.5-3.5v7M9 76l-5 2M5 76l-2 5" /></g>
+                </svg>
+              ) : (
+                <svg class="source-drawing" viewBox="0 0 160 130" fill="none" aria-hidden="true" focusable="false">
+                  <g stroke="currentColor" stroke-width="1.35" stroke-linejoin="round" stroke-linecap="round">
+                    <path class="drawing-paper" d="m80 27 59 13a5 5 0 0 1 4 6l-8 32a5 5 0 0 1-6 4l-9-2 2 13-19-17-33-7a5 5 0 0 1-4-6l8-32a5 5 0 0 1 6-4Z" />
+                    <path d="m89 42 39 9m-42-1 26 6m-22 0 28 6" />
+                    <path class="drawing-pin" d="m33 54 63-7a6 6 0 0 1 7 5l4 36a6 6 0 0 1-5 7l-38 4-18 17 2-15-10 1a6 6 0 0 1-6-5l-5-36a6 6 0 0 1 6-7Z" />
+                    <path d="m42 69 46-5m-45 13 43-5m-42 13 27-3" />
+                  </g>
+                  <g stroke="currentColor" opacity=".5" stroke-width=".75"><path d="M26 34h10m-5-5v10M116 104h10m-5-5v10M124 18h6m-3-3v6m-110 78 6-1m-3-2 .5 6" /></g>
+                </svg>
+              )}
+            </div>
+            <div class="source-action">
+              <span>Read reviews<span class="sr-only"> on {source.name} (opens in a new tab)</span></span>
+              <span class="source-action-icon"><Icon name="upRight" size={17} /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+    {visible.length > 0 && (
+      <div class="review-excerpts">
+        {visible.map(r => <figure class="review-quote"><blockquote>{r.excerpt}</blockquote><figcaption>{r.name} · <a href={r.url} target="_blank" rel="noopener noreferrer">{r.source}</a> · <time datetime={r.date}>{r.date}</time></figcaption></figure>)}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .reviews-section { background: #fff; padding-block: clamp(44px, 5.1vw, 76px); }
+  .review-layout { display: grid; grid-template-columns: minmax(0, .86fr) minmax(0, 1.42fr); align-items: center; gap: clamp(32px, 6vw, 92px); }
+  .review-intro { max-width: 420px; }
+  .review-intro h2 { line-height: 1.09; text-wrap: balance; }
+  .review-intro p { margin-top: 15px; max-width: 365px; font-size: 15px; line-height: 1.7; color: var(--muted); }
+  .review-directory-link { width: fit-content; min-height: 38px; display: inline-flex; align-items: center; gap: 9px; margin-top: 11px; color: var(--teal-dark); font-size: 13px; font-weight: 750; }
+  .review-directory-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .review-source-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 1.35vw, 21px); }
+  .review-source {
+    --plate: #edf4f7; --plate-border: #c8d9df; --drawing: #6b919c; --drawing-fill: #e1eef1; --drawing-pin: #ccdee4;
+    display: flex; flex-direction: column; min-width: 0; background: #fff; border: 1px solid var(--plate-border); border-radius: 8px; overflow: hidden;
+    text-decoration: none; box-shadow: 0 2px 0 #12342b05; transition: border-color .18s, box-shadow .18s, transform .18s;
+  }
+  .source-yelp { --plate: #faf1eb; --plate-border: #e0d3c9; --drawing: #b68a73; --drawing-fill: #f8e9de; --drawing-pin: #f5e3d6; }
+  .source-plate { min-height: 137px; padding: 19px 23px 21px; position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: flex-start; flex-direction: column; justify-content: space-between; gap: 12px; background: var(--plate); }
+  .source-plate::before { content: ''; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(90deg, var(--plate-border) 1px, transparent 1px), linear-gradient(var(--plate-border) 1px, transparent 1px); background-size: 19px 19px; opacity: .55; mask-image: linear-gradient(100deg, transparent 15%, #000 100%); }
+  .source-index { display: inline-flex; align-items: center; gap: 7px; color: #4a666d; font: 500 10px/1.4 var(--mono); letter-spacing: 1.35px; }
+  .source-index > span { width: 12px; height: 1px; background: currentColor; }
+  .source-yelp .source-index { color: #805944; }
+  .platform-wordmark { object-fit: contain; object-position: left center; width: 111px; height: 46px; margin-block: 2px 1px; max-width: 56%; }
+  .source-yelp .platform-wordmark { width: 98px; }
+  .source-drawing { position: absolute; z-index: -1; pointer-events: none; width: min(47%, 165px); height: auto; right: -3px; bottom: -3px; color: var(--drawing); opacity: .82; }
+  .drawing-paper { fill: var(--drawing-fill); } .drawing-pin { fill: var(--drawing-pin); }
+  .source-action { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 20px 14px 23px; min-height: 63px; border-top: 1px solid var(--plate-border); color: var(--ink); font-size: 16px; font-weight: 750; letter-spacing: -.45px; }
+  .source-action-icon { display: grid; flex: 0 0 32px; width: 32px; height: 32px; place-items: center; border: 1px solid #c6d7cd; border-radius: 50%; background: #f5f8f4; color: var(--teal); transition: color .18s, border-color .18s, background .18s; }
+  .review-source:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+  .review-source:focus-visible .source-action-icon { background: var(--teal); border-color: var(--teal); color: #fff; }
+  @media (hover: hover) {
+    .review-source:hover { border-color: #688c80; transform: translateY(-3px); box-shadow: 0 5px 15px #1d3b2e0c; }
+    .review-source:hover .source-action { color: var(--teal-dark); }
+    .review-source:hover .source-action-icon { background: var(--teal); border-color: var(--teal); color: #fff; }
+  }
+  .review-excerpts { margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+  .review-quote { border-inline-start: 3px solid var(--teal); background: var(--paper); padding: 19px 22px; }
+  .review-quote blockquote { margin: 0; line-height: 1.7; } .review-quote figcaption { margin-top: 12px; font-size: 13px; color: var(--muted); }
+  .review-quote a { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 3px; }
+  @media (min-width: 861px) and (max-width: 1100px) {
+    .review-layout { grid-template-columns: minmax(0, .82fr) minmax(0, 1.4fr); gap: 28px; }
+    .source-plate { padding: 16px 17px; min-height: 125px; } .source-action { padding: 12px 16px; }
+  }
+  @media (max-width: 860px) {
+    .review-layout { grid-template-columns: 1fr; gap: 23px; }
+    .review-intro { max-width: none; }
+    .review-intro h2 { font-size: clamp(31px, 4.4vw, 40px); }
+    .review-intro p { margin-top: 10px; max-width: none; }
+    .review-directory-link { margin-top: 3px; }
+    .source-plate { min-height: 128px; }
+  }
+  @media (max-width: 520px) {
+    .reviews-section { padding-block: 38px; }
+    .review-layout { gap: 18px; } .review-intro h2 { font-size: 31px; }
+    .review-intro p { font-size: 14px; line-height: 1.65; max-width: 34ch; }
+    .review-directory-link { font-size: 12px; }
+    .review-source-list { gap: 11px; }
+    .source-plate { min-height: 115px; padding: 14px 15px 17px; gap: 12px; }
+    .source-index { font-size: 9px; letter-spacing: 1px; } .source-index > span { width: 9px; }
+    .platform-wordmark { width: 88px; height: 37px; max-width: 72%; } .source-yelp .platform-wordmark { width: 76px; }
+    .source-drawing { width: 43%; right: -11px; bottom: -2px; opacity: .6; }
+    .source-action { padding: 12px; gap: 5px; font-size: 14px; min-height: 52px; letter-spacing: -.4px; }
+    .source-action-icon { width: 25px; height: 25px; flex-basis: 25px; } .source-action-icon :global(svg) { width: 13px; height: 13px; }
+  }
+  @media (max-width: 359px) {
+    .review-source-list { grid-template-columns: 1fr; gap: 10px; }
+    .review-source { display: grid; grid-template-columns: .88fr 1fr; }
+    .source-plate { min-height: 81px; padding: 10px 12px; gap: 6px; }
+    .platform-wordmark { width: 74px; height: 30px; } .source-yelp .platform-wordmark { width: 65px; }
+    .source-action { border-top: 0; border-left: 1px solid var(--plate-border); }
+  }
+  @media (prefers-reduced-motion: reduce) { .review-source, .source-action-icon { transition: none; } .review-source:hover { transform: none; } }
+</style>

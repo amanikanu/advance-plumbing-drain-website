@@ -1,0 +1,1 @@
+import {business} from '@content/business';export function GET(){return new Response(`User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${business.url}/sitemap.xml\n`,{headers:{'Content-Type':'text/plain'}})}

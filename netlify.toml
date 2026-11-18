@@ -1,0 +1,27 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+[build.environment]
+  NODE_VERSION = "22"
+  PUBLIC_REQUEST_MODE = "live"
+[functions]
+  node_bundler = "esbuild"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://www.googletagmanager.com; font-src 'self'; frame-src https://maps.google.com https://www.google.com; media-src 'self' https://advancedplumbingsf.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[context.deploy-preview.environment]
+  PUBLIC_REQUEST_MODE = "preview"
+  REQUEST_DELIVERY = "preview"
+[context.branch-deploy.environment]
+  PUBLIC_REQUEST_MODE = "preview"
+  REQUEST_DELIVERY = "preview"

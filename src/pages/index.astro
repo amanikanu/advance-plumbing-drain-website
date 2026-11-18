@@ -1,0 +1,10 @@
+---
+import {getCollection} from 'astro:content';import Base from '../layouts/Base.astro';import Hero from '../components/Hero.astro';import EmergencyBlock from '../components/EmergencyBlock.astro';import TrustBar from '../components/TrustBar.astro';import ServiceCard from '../components/ServiceCard.astro';import SectionLabel from '../components/SectionLabel.astro';import Icon from '../components/Icon.astro';import RequestForm from '../components/RequestForm.astro';import ReviewList from '../components/ReviewList.astro';import ProcessSteps from '../components/ProcessSteps.astro';import ServiceAreaGrid from '../components/ServiceAreaGrid.astro';import ArticleCard from '../components/ArticleCard.astro';import ContactBlock from '../components/ContactBlock.astro';import {categories,urls} from '@content/navigation';
+const articles=(await getCollection('blog')).sort((a,b)=>b.data.date.localeCompare(a.data.date)).slice(0,3);
+---
+<Base title="Plumber in San Francisco, 24/7 | Advanced Plumbing & Drain" description="Plumbing, sewer, drain, and water heater service for San Francisco and San Mateo County. Call (415) 744-4944 for 24/7 help or request service online." hasForm hero>
+ <Hero/><EmergencyBlock/><TrustBar/>
+ <section class="services-section section-space" id="services"><div class="container"><div class="section-heading"><div><SectionLabel text="OUR SERVICES"/><h2>How can we help?</h2></div><a class="text-link" href={urls.plumbing+'#services-directory'}>View all services <Icon name="arrow" size={17}/></a></div><div class="services-grid">{categories.map(item=><ServiceCard item={item}/>)}</div></div></section>
+ <RequestForm/><ReviewList/><ProcessSteps/><ServiceAreaGrid/>
+ <section class="section-space journal-section"><div class="container"><div class="section-heading"><div><SectionLabel text="THE PLUMBING JOURNAL"/><h2>A little plumbing know-how.</h2></div><a class="text-link" href="/blog/">All articles <Icon name="arrow" size={16}/></a></div><div class="articles-grid">{articles.map((post,index)=><ArticleCard post={post} index={index}/>)}</div></div></section><ContactBlock/>
+</Base>

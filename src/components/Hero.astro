@@ -1,0 +1,9 @@
+---
+import Icon from './Icon.astro';import {business,phoneLink} from '@content/business';import SectionLabel from './SectionLabel.astro';
+---
+<section class="hero blueprint-grid" aria-labelledby="hero-title"><div class="hero-top-marks" aria-hidden="true"></div><div class="container hero-inner">
+ <div class="hero-copy"><SectionLabel text="RESIDENTIAL & COMMERCIAL" light/><h1 id="hero-title">Plumber in<br/>San Francisco, <span>24/7.</span></h1><p>From leaking pipes to sewer repairs, we keep the water<br class="wide-break"/> flowing for San Francisco homes and businesses.</p>
+ <div class="hero-actions"><a class="button button-mint" href={phoneLink}><Icon name="phone" size={19}/>{business.phone}</a><a class="button button-light-outline" href="#request-service">Request Service <Icon name="arrow" size={18}/></a></div>
+ <div class="hero-note"><i class="status-dot"></i> Here when you need us. Day or night.</div></div>
+ <figure class="hero-figure"><picture><source media="(max-width:600px)" srcset="/images/sf-blueprint-small.webp"/><img src="/images/sf-blueprint.webp" alt="Architectural drawing of San Francisco row houses and their plumbing." width="1171" height="745" fetchpriority="high" decoding="sync"/></picture><figcaption><span class="fig-line"></span>FIG. 01 <span class="fig-slash">/</span> SAN FRANCISCO, CA</figcaption></figure>
+ </div></section>

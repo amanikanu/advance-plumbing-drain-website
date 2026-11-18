@@ -1,0 +1,21 @@
+---
+import '../styles/mobile-navigation.css';
+import MobileNavigation from './MobileNavigation.astro';
+import {offers} from '@content/offers';import {business,phoneLink} from '@content/business';import {urls,categories,areaLinks} from '@content/navigation';import Icon from './Icon.astro';
+const {hasForm=false}=Astro.props;const request=hasForm?'#request-service':'/contact-us/#request-service';
+const nav=[{name:'Services',href:urls.plumbing,links:[...categories,{name:'Emergency plumbing',href:urls.emergency},{name:'All plumbing services',href:urls.plumbing+'#services-directory'}]},{name:'Service Areas',href:urls.areas,links:[...areaLinks,{name:'All service areas',href:urls.areas}]},{name:'About',href:urls.about},{name:'Reviews',href:urls.reviews},{name:'Resources',href:urls.resources,links:[{name:'Plumbing journal',href:urls.blog},{name:'Media room',href:urls.media},{name:'All resources',href:urls.resources}]},{name:'Contact',href:urls.contact}];
+---
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="utility"><div class="container utility-inner"><span><Icon name="pin" size={13}/><span>Serving San Francisco & San Mateo County</span></span><span class="utility-hours"><i class="status-dot"></i> Open 24 hours, 7 days a week</span></div></div>
+<header class="site-header" data-navigation-header><div class="container header-inner">
+ <a class="brand" href="/" aria-label="Advanced Plumbing and Drain home"><img src="/images/brand-logo.png" alt="Advanced Plumbing & Drain" width="225" height="82"/></a>
+ <nav aria-label="Main navigation" class="desktop-nav">{nav.map((item,i)=><div class="nav-group"><a href={item.href} aria-current={Astro.url.pathname===item.href?'page':undefined}>{item.name}</a>{item.links&&<><button class="dropdown-toggle" aria-expanded="false" aria-controls={'nav-list-'+i} aria-label={'Show '+item.name.toLowerCase()+' menu'}><Icon name="chevron" size={12}/></button><div class="dropdown" id={'nav-list-'+i} hidden><div class="dropdown-label">{item.name}</div>{item.links.map(l=><a href={l.href}>{l.name}<Icon name="arrow" size={14}/></a>)}</div></>}</div>)}</nav>
+ <div class="header-actions"><a class="header-phone" href={phoneLink} aria-label={'Call 24/7 at '+business.phone}><Icon name="phone" size={17}/><span>{business.phone}</span></a><a class="button button-teal header-request" href={request}>Request Service <Icon name="arrow" size={16}/></a></div>
+ <button type="button" class="mobile-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-nav"><span class="hamburger-glyph" aria-hidden="true"><i></i><i></i><i></i></span></button>
+ </div>
+ <MobileNavigation items={nav}/>
+</header>
+<div class="mobile-nav-scrim" data-state="closed" aria-hidden="true" hidden></div>
+{business.announcement.text&&new Date(business.announcement.endDate).getTime()>=Date.now()&&<div class="announcement" data-expires={business.announcement.endDate}>{business.announcement.text}</div>}
+
+{offers.filter(o=>o.approved&&Date.parse(o.startsOn)<=Date.now()&&Date.parse(o.endsOn+'T23:59:59-08:00')>=Date.now()).map(o=><aside class="announcement" data-expires={o.endsOn}><strong>{o.title}</strong> · {o.terms} <a class="text-link" href={o.href}>Offer details <Icon name="arrow" size={14}/></a></aside>)}

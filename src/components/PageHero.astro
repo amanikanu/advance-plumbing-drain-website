@@ -1,0 +1,6 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';import SectionLabel from './SectionLabel.astro';import ServiceArt from './ServiceArt.astro';import Icon from './Icon.astro';import {business,phoneLink} from '@content/business';
+interface Props{title:string;label:string;intro?:string;crumbs:{name:string;href:string}[];art?:string;actions?:boolean;hasForm?:boolean}
+const {title,label,intro,crumbs,art,actions=false,hasForm=false}=Astro.props;
+---
+<section class:list={['interior-hero',{'with-art':!!art}]}><div class="container"><Breadcrumbs items={crumbs}/><div class="hero-content"><SectionLabel text={label}/><h1>{title}</h1>{intro&&<p class="hero-intro">{intro}</p>}<slot/>{actions&&<div class="interior-actions"><a class="button button-teal" href={phoneLink}><Icon name="phone" size={16}/>{business.phone}</a><a class="button button-outline" href={hasForm?'#request-service':'/contact-us/#request-service'}>Request Service <Icon name="arrow" size={15}/></a></div>}</div>{art&&<div class="art-plate"><ServiceArt kind={art}/></div>}</div></section>

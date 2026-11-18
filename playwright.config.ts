@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'./tests',testMatch:'**/*.spec.ts',timeout:45000,fullyParallel:true,workers:3,retries:0,reporter:[['list'],['json',{outputFile:'docs/browser-qa.json'}]],use:{baseURL:'http://127.0.0.1:4321',viewport:{width:1366,height:900},headless:true,launchOptions:{args:['--no-sandbox']},reducedMotion:'reduce'},webServer:{command:'npm run preview',url:'http://127.0.0.1:4321',reuseExistingServer:true,timeout:25000}});

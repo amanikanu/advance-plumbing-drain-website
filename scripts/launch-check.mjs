@@ -1,0 +1,2 @@
+import {readFileSync} from 'node:fs';
+const checks=JSON.parse(readFileSync('content/launch-approvals.json','utf8'));const missing=Object.keys(checks).filter(k=>checks[k]!==true);if(missing.length){console.error('NOT CLEARED FOR PUBLIC LAUNCH. Outstanding sign-offs:\n'+missing.map(k=>'• '+k).join('\n'));process.exit(1)}console.log('Documented launch sign-offs are complete. Verify production secret configuration in the hosting dashboard.');

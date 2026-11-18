@@ -1,0 +1,4 @@
+---
+import MapFacade from './MapFacade.astro';import SectionLabel from './SectionLabel.astro';import {business,phoneLink,address} from '@content/business';import Icon from './Icon.astro';const {full=false}=Astro.props;
+---
+<section class="contact-section section-space"><div class="container contact-grid"><div><SectionLabel text="GET IN TOUCH"/><h2>{full?'Contact the office.':'A local number. A real team.'}</h2><p class="section-intro">For an urgent plumbing issue, a phone call is the best place to start.</p><div class="contact-details"><a href={phoneLink}><Icon name="phone" size={19}/>{business.phone}</a><a href={'mailto:'+business.email}><Icon name="mail" size={19}/>{business.email}</a>{business.showAddress&&<div><Icon name="pin" size={19}/><address>{address}</address></div>}<div><Icon name="clock" size={19}/>{business.hours}</div></div></div>{business.showAddress&&<MapFacade/>}</div></section>

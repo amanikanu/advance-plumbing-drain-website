@@ -1,0 +1,9 @@
+---
+import {team} from '@content/team';import {business} from '@content/business';import Icon from './Icon.astro';
+---
+<div class="team-photo"><img src={team.photo} width="1440" height="488" alt={team.alt} loading="lazy"/>{business.video.approved&&business.video.captions&&<button type="button" class="button video-load" data-src={business.video.url} data-captions={business.video.captions}><Icon name="play" size={17}/>Watch the video</button>}</div>
+{team.members.filter(m=>m.approved).map(m=><p>{m.name} · {m.role}</p>)}
+{business.video.approved&&business.video.transcript&&<details><summary>Video transcript</summary><p>{business.video.transcript}</p></details>}
+<script>
+ document.querySelectorAll<HTMLButtonElement>('.video-load').forEach(b=>b.addEventListener('click',()=>{const v=document.createElement('video');v.controls=true;v.playsInline=true;v.src=b.dataset.src!;const track=document.createElement('track');track.kind='captions';track.srclang='en';track.label='English';track.src=b.dataset.captions!;track.default=true;v.append(track);b.parentElement!.replaceChildren(v);v.play().catch(()=>{});}));
+</script>

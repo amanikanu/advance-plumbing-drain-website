@@ -1,0 +1,9 @@
+---
+import Icon from './Icon.astro';import ServiceArt from './ServiceArt.astro';import {categories} from '@content/navigation';
+interface Props{item:(typeof categories)[number]};const {item}=Astro.props;
+---
+<a class="service-card" href={item.href}>
+ <div class="service-card-top"><span class="mono">SVC / {item.code}</span><Icon name="upRight" size={17}/></div>
+ <div class="service-art-wrap"><ServiceArt kind={item.icon}/></div>
+ <h3>{item.name}</h3><p>{item.description}</p><span class="card-link">View service <Icon name="arrow" size={15}/></span>
+</a>

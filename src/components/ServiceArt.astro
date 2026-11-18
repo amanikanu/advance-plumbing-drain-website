@@ -1,0 +1,42 @@
+---
+const {kind='faucet',class:cls=''}=Astro.props;
+---
+<svg class:list={['service-art',cls]} viewBox="0 0 180 112" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+ <g stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round">
+ {kind==='faucet' && <>
+  <path class="art-shadow" d="m39 87 33-6 54 9-29 10z"/>
+  <path class="art-fill" d="m43 72 0-20 8-5 9 5v9h24V48l8-6 11 4v15h13c9 0 15 6 15 15v8l-14 4v-9c0-3-2-5-5-5H70l-10 5z"/>
+  <path d="m43 52 9 5 8-5m-8 5v21m8-17v9h25l11-4V46m7 15-7 5m0 0h17c8 0 13 6 13 14v5m-9-7 10-4m-57 0v-4"/>
+  <path class="art-fill" d="m82 44 11-6 12 5-11 7zM82 44v6l12 6 11-6v-7m-11 7v6M88 39V28l7 3v9l-3 2z"/>
+  <path class="art-fill" d="m74 31 28-13 5 3-28 14-5-1zm8-11 4-2 20 13-5 3-19-12z"/>
+  <path d="m75 31 4 1 24-12m-2 11 4-1m10 55 14-4 4 2-1 5-15 4-3-3zM46 49v-4l8-5 8 5v8l-4 3M46 45l8 5 8-5m-8 5v6"/>
+  <path class="art-teal" d="M124 94s-4 5-4 7a3 3 0 0 0 6 0c0-2-2-7-2-7Z"/>
+ </>}
+ {kind==='pipe' && <>
+  <path class="art-shadow" d="m36 87 59-18 49 15-62 20z"/>
+  <path class="art-fill" d="M44 40v24c0 14 9 20 21 24 20 7 40-2 40-20V53c0-6 4-9 9-11l11-4-6-17-15 5c-10 4-18 13-18 23v14c0 10-11 15-20 11-4-2-5-6-5-11V38z"/>
+  <path d="M51 42v25c0 13 10 16 17 19 16 5 31-3 31-18V51c0-9 7-17 17-20l7-2M46 58c4 4 10 3 15 0M86 57c5 4 13 5 19 0m-19 5c5 4 14 3 19-1m-42 22 2-10m5 13 3-11"/>
+  <ellipse class="art-fill" cx="53" cy="38" rx="14" ry="6"/><path d="M39 38v7c4 7 24 7 28-1v-6"/><ellipse cx="53" cy="37.5" rx="9" ry="3"/>
+  <ellipse class="art-fill" cx="123" cy="28" rx="8.5" ry="15" transform="rotate(-27 123 28)"/><ellipse cx="124" cy="27.5" rx="4" ry="10" transform="rotate(-27 124 27.5)"/>
+  <path d="m108 28 5 2 4 9M73 88v5l8 3 9-5v-5m-17 7 9-4 7 2m-7-2v7"/>
+ </>}
+ {kind==='heater' && <>
+  <path class="art-shadow" d="m49 90 44-10 41 10-41 13z"/>
+  <path class="art-fill" d="M59 29c0-13 60-13 60 0v54c0 15-60 15-60 0V29Z"/>
+  <ellipse cx="89" cy="29" rx="30" ry="9"/><path d="M61 34c8 10 46 12 56 0M59 78c7 13 53 13 60 0M65 40v35m46-36v36M67 92v4l8 1v-4m29 0v4l8-3v-4"/>
+  <path class="art-fill" d="m79 24 0-8 7-3 6 3v9l-7 3zM79 16l6 3 7-3m-7 3v9m15-3V11l7-2 1 2v15l-6 2zM100 11l3 2 5-2"/>
+  <path d="M72 29v-8m-3-1 5 2 4-2m-4 2v7m5-18 7-3 7 4-7 4z"/>
+  <rect x="77" y="47" width="22" height="18" rx="2"/><circle cx="84" cy="53" r="3"/><path d="m84 53 1-2m5 1h5m-15 7h15m-15 2h10M76 73l23 1m-21 3h19"/>
+  <path class="art-teal" d="m115 57 8-2 4-11m-8 20 9-3"/>
+  <path d="m122 41 7-2 2 5-7 2z"/>
+ </>}
+ {kind==='building' && <>
+  <path class="art-shadow" d="m28 83 69-19 50 17-70 20z"/>
+  <path class="art-fill" d="m40 44 56-19 39 16v39L79 99 40 83z"/>
+  <path d="m40 44 39 16 56-19M79 60v39m-40-58 56-20 41 16v6L79 63 39 47zM39 41l40 16 57-20m-57 20v6M48 41l47-16 32 12-48 16z"/>
+  <path d="m87 45 0-11 11-4 13 5v11l-12 4zm0-11 12 5 12-4m-12 4v11m-7-12 0 5m3-4v5m8-5 5-2m-5 5 5-2"/>
+  <path d="m45 53 10 4v11l-10-4zm15 6 12 5v11l-12-5zm-15 9 10 4v15l-10-5zm16 6 10 4v14l-10-4zM85 64l11-4v10l-11 4zm17-6 10-4v10l-10 4zm15-6 11-4v11l-11 3zM85 79l11-4v15l-11 4zm17-6 10-4v15l-10 3zm15-6 11-4v15l-11 3z"/>
+ </>}
+ </g>
+ <g class="art-measure" stroke="currentColor" stroke-width=".7" opacity=".35"><path d="m27 95 22 8m-24-5 3-6m20 14 3-6M140 28h10m-5-5v10M32 26h6m-3-3v6"/></g>
+</svg>

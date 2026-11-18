@@ -1,0 +1,13 @@
+{
+  "businessActive": false,
+  "napAndLicenseVerified": false,
+  "profilesAndMarksApproved": false,
+  "schedulerConfirmed": false,
+  "reviewUsageCleared": false,
+  "sourceContentAndPhotosApproved": false,
+  "privacyAndTermsApproved": false,
+  "confirmationCopyApproved": false,
+  "stagingOfficeAndSenderReceiptsVerified": false,
+  "accessibilityManualReviewComplete": false,
+  "analyticsBaselineAndMigrationSignoff": false
+}

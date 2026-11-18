@@ -1,0 +1,4 @@
+---
+import {areaLinks} from '@content/navigation';import SectionLabel from './SectionLabel.astro';import Icon from './Icon.astro';
+---
+<section class="areas-section"><div class="container service-areas-inner"><div><SectionLabel text="SERVICE COVERAGE" light/><h2>Right here in<br/>the Bay Area.</h2><p>Serving San Francisco and San Mateo County, including Daly City and South San Francisco.</p><a class="text-link light-link" href="/service-areas/">Explore service areas <Icon name="arrow" size={16}/></a></div><div class="area-list">{areaLinks.map((l,i)=><a href={l.href}><span class="mono area-index">0{i+1}</span><Icon name="pin" size={19}/><strong>{l.name}</strong><Icon name="arrow" size={18}/></a>)}</div></div></section>

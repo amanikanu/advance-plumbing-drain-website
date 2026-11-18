@@ -1,0 +1,1 @@
+{"extends":"astro/tsconfigs/strict","include":[".astro/types.d.ts","**/*.ts","**/*.astro"],"exclude":["dist","node_modules",".cache"],"compilerOptions":{"allowJs":true,"baseUrl":".","paths":{"@/*":["src/*"],"@content/*":["content/*"]}}}

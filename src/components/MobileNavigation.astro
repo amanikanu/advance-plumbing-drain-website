@@ -1,0 +1,34 @@
+---
+import Icon from './Icon.astro';
+import { business, phoneLink } from '@content/business';
+import { categories } from '@content/navigation';
+
+interface Props { items: { name: string; href: string }[] }
+const { items } = Astro.props;
+---
+<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" data-state="closed" hidden inert>
+  <div class="mobile-nav-heading">
+    <span class="mobile-nav-caption"><i aria-hidden="true"></i>Explore the site</span>
+    <span class="mobile-nav-availability"><i aria-hidden="true"></i>Open 24/7</span>
+  </div>
+  <ul class="mobile-nav-list">
+    {items.map((item, index) => (
+      <li class="mobile-nav-row" style={`--entry-delay:${18 + index * 13}ms`}>
+        <a class="mobile-nav-link" href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>
+          <span class="mobile-nav-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <span>{item.name}</span>
+          <Icon name="arrow" size={16} />
+        </a>
+        {item.name === 'Services' && (
+          <div class="mobile-subnav">
+            {categories.slice(1).map(c => <a href={c.href} aria-current={Astro.url.pathname === c.href ? 'page' : undefined}>{c.icon === 'building' ? 'Commercial' : c.name}</a>)}
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
+  <a class="mobile-nav-call" href={phoneLink}>
+    <span class="mobile-nav-phone-icon"><Icon name="phone" size={17} /></span>
+    <span>Call for service</span><strong>{business.phone}</strong>
+  </a>
+</nav>

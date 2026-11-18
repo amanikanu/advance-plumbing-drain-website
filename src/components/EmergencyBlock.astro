@@ -1,0 +1,4 @@
+---
+import Icon from './Icon.astro';import {phoneLink} from '@content/business';
+---
+<aside class="emergency" aria-labelledby="emergency-title"><div class="container emergency-inner"><div class="emergency-icon"><Icon name="siren" size={29} stroke={1.6}/></div><div class="emergency-copy"><span class="mono emergency-label">URGENT PLUMBING HELP</span><h2 id="emergency-title">Burst pipe, sewage backup, no hot water?</h2></div><a class="button button-emergency" href={phoneLink} data-event="emergency_call"><Icon name="phone" size={16}/>Call for Emergency Service <Icon name="upRight" size={14}/></a></div></aside>

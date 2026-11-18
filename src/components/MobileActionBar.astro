@@ -1,0 +1,4 @@
+---
+import Icon from './Icon.astro';import {phoneLink} from '@content/business';const {hasForm=false}=Astro.props;
+---
+<div class="mobile-actions"><a href={phoneLink} class="button button-outline"><Icon name="phone" size={17}/>Call 24/7</a><a href={hasForm?'#request-service':'/contact-us/#request-service'} class="button button-teal">Request Service <Icon name="arrow" size={16}/></a></div>

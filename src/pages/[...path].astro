@@ -1,0 +1,6 @@
+---
+import {getEntry} from 'astro:content';import {routes} from '../lib/routes';import ServicePage from '../views/ServicePage.astro';import LocationPage from '../views/LocationPage.astro';import PostPage from '../views/PostPage.astro';import InfoPage from '../views/InfoPage.astro';import ArchivePage from '../views/ArchivePage.astro';
+export async function getStaticPaths(){return(await routes()).map(r=>({params:{path:r.path.slice(1,-1)},props:{kind:r.kind,id:r.id}}))};
+const {kind,id}=Astro.props;const service=kind==='service'?await getEntry('services',id):null,location=kind==='location'?await getEntry('locations',id):null,post=kind==='post'?await getEntry('blog',id):null;
+---
+{service&&<ServicePage entry={service}/>}{location&&<LocationPage entry={location}/>}{post&&<PostPage entry={post}/>}{kind==='page'&&<InfoPage id={id}/>}{kind==='archive'&&<ArchivePage id={id}/>}

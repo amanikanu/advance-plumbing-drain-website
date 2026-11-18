@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.cache/
+.astro/
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/
+.lighthouseci/
+.config/
+.sudo_as_admin_successful

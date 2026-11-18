@@ -1,0 +1,4 @@
+---
+import archive from '@content/archive-categories.json';import {business} from '@content/business';import Base from '../layouts/Base.astro';import PageHero from '../components/PageHero.astro';import ArticleLibrary from '../components/ArticleLibrary.astro';import SmallCTA from '../components/SmallCTA.astro';const {id}=Astro.props;const name=archive.find(c=>c.slug===id)?.name||'Plumbing';const crumbs=[{name:'Plumbing journal',href:'/blog/'},{name,href:`/category/${id}/`}];
+---
+<Base title={name+' articles | '+business.shortName} description={'Browse the '+name.toLowerCase()+' archive from the Advanced Plumbing & Drain journal.'} breadcrumbs={crumbs}><PageHero title={name+' articles.'} label="JOURNAL ARCHIVE" crumbs={crumbs}/><section class="page-content"><ArticleLibrary tag={id}/></section><SmallCTA/></Base>
